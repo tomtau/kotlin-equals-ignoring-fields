@@ -11,7 +11,9 @@ import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
+import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
+import javax.lang.model.type.TypeKind
 
 @AutoService(Processor::class)
 class EqualsIgnoreProcessor : AbstractProcessor() {
@@ -39,8 +41,8 @@ class EqualsIgnoreProcessor : AbstractProcessor() {
             val arrayEquals = it.arraysContentEquals
             val string = StringBuilder("if (this === other) return true\n")
             klass.enclosedElements.forEach {
-                if (it.kind == ElementKind.FIELD && it.toString() !in ignored) {
-                    if (it.asType().kind.name == "ARRAY" && arrayEquals) {
+                if (it.kind == ElementKind.FIELD && it.toString() !in ignored && Modifier.STATIC !in it.modifiers) {
+                    if (it.asType().kind == TypeKind.ARRAY && arrayEquals) {
                         string.appendln("if (!Arrays.equals(this.$it, other.$it)) return false")
                     } else {
                         string.appendln("if (this.$it != other.$it) return false")

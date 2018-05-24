@@ -1,17 +1,22 @@
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'java'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
 group 'io.cryptoblk'
-version '0.1-SNAPSHOT'
+version '0.2-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.2.41'
 
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
@@ -24,4 +29,30 @@ dependencies {
     compile 'com.squareup:kotlinpoet:0.7.0'
     compile "com.google.auto.service:auto-service:1.0-rc4"
     kapt "com.google.auto.service:auto-service:1.0-rc4"
+}
+
+bintray {
+    user = "$bintray_user"
+    key = "$bintray_key"
+    publications = ['MyPublication']
+    pkg {
+        repo = 'equals-ignoring-fields'
+        name = 'equals-ignoring-fields'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/tomtau/kotlin-equals-ignoring-fields.git'
+        version {
+            name = '0.2'
+        }
+    }
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'io.cryptoblk'
+            artifactId 'equals-ignoring-fields'
+            version '0.2'
+        }
+    }
 }

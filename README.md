@@ -33,7 +33,7 @@ build.gradle example:
 ```
 buildscript {
     ext.kotlin_version = '1.2.41'
-    ext.ignore_equals_version = '0.1'
+    ext.ignore_equals_version = '0.2'
 
     repositories {
         mavenCentral()
