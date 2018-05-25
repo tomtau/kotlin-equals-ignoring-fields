@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 group 'io.cryptoblk'
-version '0.2-SNAPSHOT'
+version '0.3-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.2.41'
@@ -41,7 +41,7 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/tomtau/kotlin-equals-ignoring-fields.git'
         version {
-            name = '0.2'
+            name = '0.3'
         }
     }
 }
@@ -52,7 +52,7 @@ publishing {
             from components.java
             groupId 'io.cryptoblk'
             artifactId 'equals-ignoring-fields'
-            version '0.2'
+            version '0.3'
         }
     }
 }

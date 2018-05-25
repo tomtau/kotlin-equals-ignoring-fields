@@ -27,13 +27,14 @@ The second argument of `EqualsIgnore` indicates whether the
 arrays should be compared using the structural equality (`Arrays.equals`)
 rather than the referential equality.
 The second argument is optional (the default value is true).
-
+The third argument of `EqualsIgnore` is an optional method name: if it's not set, the
+corresponding method names are auto-generated as shown above (`equalsIgnore_<fields>`).
 
 build.gradle example:
 ```
 buildscript {
     ext.kotlin_version = '1.2.41'
-    ext.ignore_equals_version = '0.2'
+    ext.ignore_equals_version = '0.3'
 
     repositories {
         mavenCentral()

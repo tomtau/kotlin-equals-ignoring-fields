@@ -4,4 +4,4 @@ package io.cryptoblk.equalsignore
 annotation class GenEqualsIgnore(val annotations: Array<EqualsIgnore>)
 
 @Target(AnnotationTarget.CLASS)
-annotation class EqualsIgnore(val fields: Array<String>, val arraysContentEquals: Boolean = true)
+annotation class EqualsIgnore(val fields: Array<String>, val arraysContentEquals: Boolean = true, val customMethodName: String = "")

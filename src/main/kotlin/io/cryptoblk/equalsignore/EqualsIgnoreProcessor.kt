@@ -36,7 +36,7 @@ class EqualsIgnoreProcessor : AbstractProcessor() {
         val file = FileSpec.builder(pack, fileName)
         file.addStaticImport("java.util", "Arrays")
         annotations.forEach {
-            val name = "equalsIgnore_${it.fields.joinToString("_")}"
+            val name = if (it.customMethodName.isEmpty()) "equalsIgnore_${it.fields.joinToString("_")}" else it.customMethodName
             val ignored = it.fields.toSet()
             val arrayEquals = it.arraysContentEquals
             val string = StringBuilder("if (this === other) return true\n")
